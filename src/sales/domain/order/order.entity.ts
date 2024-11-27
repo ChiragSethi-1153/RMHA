@@ -1,13 +1,8 @@
 import { Exclude } from 'class-transformer';
-import {
-  Entity,
-  PrimaryColumn,
-  Column,
-  CreateDateColumn,
-} from 'typeorm';
+import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm';
 import { OrderStatus } from './enums/status-enum';
 
-@Entity('sale_order')
+@Entity('sales_order')
 export class Order {
   @PrimaryColumn({ type: 'uuid', unique: true })
   order_id: string;

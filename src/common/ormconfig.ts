@@ -14,19 +14,19 @@ export const dataSourceOptions = (
   database: configService.get<string>('DB_NAME'),
   entities: [
     'dist/billing/domain/**/*.entity.js',
-    'dist/sale/domain/**/*.entity.js',
+    'dist/sales/domain/**/*.entity.js',
   ],
   synchronize: false,
   seedTableName: 'seeds',
   seedName: 'seeder',
   migrationsTableName: 'migrations',
   migrations: [
+    'dist/sales/infrastructure/database/migrations/*.js',
     'dist/billing/infrastructure/database/migrations/*.js',
-    'dist/sale/infrastructure/database/migrations/*.js',
   ],
   seeds: [
-    'dist/billing/infrastructure/database/seeders/*.js',
-    'dist/sale/infrastructure/database/seeders/*.js',
+    'dist/sales/infrastructure/database/seeders/*.js',
+    // 'dist/billing/infrastructure/database/seeders/*.js',
   ],
   seedTracking: true,
 });
