@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { json, urlencoded } from 'express';
 import { ValidationPipe } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
-import { DtoValidation } from './sales/infrastructure/exceptions/exceptions';
+import { DtoValidation } from './common/exceptions/exceptions';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

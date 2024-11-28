@@ -26,7 +26,7 @@ export const dataSourceOptions = (
   ],
   seeds: [
     'dist/sales/infrastructure/database/seeders/*.js',
-    // 'dist/billing/infrastructure/database/seeders/*.js',
+    'dist/billing/infrastructure/database/seeders/*.js',
   ],
   seedTracking: true,
 });

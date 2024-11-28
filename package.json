@@ -23,7 +23,7 @@
     "migration:create": "typeorm migration:create",
     "up": "npm run build && npm run typeorm -- migration:run",
     "down": "npm run build && npm run typeorm -- migration:revert",
-    "seed": "npm run build && node dist/sales/infrastructure/database/scripts/seed.js",
+    "seed": "npm run build && node dist/sales/infrastructure/database/scripts/seed.js && node dist/billing/infrastructure/database/scripts/seed.js",
     "dispatch-messages-sales": "node dist/sales/infrastructure/message-bus/cli-commands/command-handler dispatch-messages",
     "handle-messages-sales": "node dist/sales/infrastructure/message-bus/cli-commands/command-handler handle-messages",
     "dispatch-messages-billing": "node dist/billing/infrastructure/message-bus/cli-commands/command-handler dispatch-messages",

@@ -8,7 +8,7 @@ import { ProducerService } from './rabbitmq/workers/producer.service';
 import { OutboxMessageRepository } from '../repositories/outbox-message/outbox-message.repository';
 import { OutboxMessageRelay } from './outbox-message-handler.service';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '../database/type-orm';
+import { TypeOrmModule } from '../../../common/type-orm';
 
 @Module({
   imports: [

@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { StorageFileHandlerService } from '../../storage/file-storage-service';
 import { DriveConfigurationService } from '../../storage/drive-config';
-import { JsonMessageParserService } from '../../json-parser/json-parser.service';
+import { JsonMessageParserService } from '../../../../billing/infrastructure/json-parser/json-parser.service';
 import { ProductSales } from 'src/sales/domain/product/product.entity';
 
 export default class SalesProductSeeder implements Seeder {

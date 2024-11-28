@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { dataSourceOptions } from './common/ormconfig';
 import { SalesModule } from './sales/sales.module';
-import { TypeOrmModule } from './sales/infrastructure/database/type-orm';
+import { TypeOrmModule } from './common/type-orm';
 
 @Module({
   imports: [
