@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { json, urlencoded } from 'express';
 import { ValidationPipe } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
+import { DtoValidation } from './sales/infrastructure/exceptions/exceptions';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,7 +19,7 @@ async function bootstrap() {
       whitelist: true,
       transform: true,
       exceptionFactory: (errors: ValidationError[]) => {
-        return false;
+        return new DtoValidation(errors);
       },
     }),
   );

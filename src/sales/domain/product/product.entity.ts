@@ -5,6 +5,6 @@ export class ProductSales {
   @PrimaryColumn({ type: 'uuid', unique: true })
   product_id: string;
 
-  @Column({ type: 'decimal', nullable: false })
+  @Column({ type: 'float', nullable: false })
   price: number;
 }

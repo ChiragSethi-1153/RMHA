@@ -29,7 +29,7 @@ export class CreateOrderSales1732693476206 implements MigrationInterface {
             },
             {
               name: 'total_amount',
-              type: 'decimal',
+              type: 'float',
               isNullable: false,
             },
             {

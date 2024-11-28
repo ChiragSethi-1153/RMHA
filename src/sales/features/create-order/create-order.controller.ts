@@ -2,7 +2,7 @@ import { Body, Controller, Post } from "@nestjs/common";
 import { CreateOrderCommand } from "./create-order.dto";
 import { CreateOrderHandler } from "./create-order.service";
 
-@Controller('orders')
+@Controller('api/v1/sales/orders')
 export class CreateOrderController {
     constructor(private readonly handler: CreateOrderHandler){}
 

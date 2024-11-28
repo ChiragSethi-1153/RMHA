@@ -24,8 +24,20 @@ export class OrderRepository extends Repository<Order> {
     return await this.findOneBy({ order_id: orderId });
   }
 
-  async getOrders() {
+  async listOrders() {
     return await this.find();
   }
+
+  async updateOrder(
+    payload: any,
+    orderId: string,
+    transaction: EntityManager = null
+  ) {
+    if(transaction) {
+      return await transaction.update(Order, orderId, payload);
+    }
+    return await this.update(orderId, payload);
+  }
+
 
 }

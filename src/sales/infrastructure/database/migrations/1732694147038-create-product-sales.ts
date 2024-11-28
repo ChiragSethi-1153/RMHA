@@ -16,7 +16,7 @@ export class CreateProductSales1732694147038 implements MigrationInterface {
                 },
                 {
                   name: 'price',
-                  type: 'decimal',
+                  type: 'float',
                   isNullable: false,
                 }
               ],

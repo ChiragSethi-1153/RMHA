@@ -13,7 +13,7 @@ export class Order {
   @Column({ type: 'uuid', nullable: false })
   customer_id: string;
 
-  @Column({ type: 'decimal', nullable: false })
+  @Column({ type: 'float', nullable: false })
   total_amount: number;
 
   @CreateDateColumn({ type: 'timestamp' })

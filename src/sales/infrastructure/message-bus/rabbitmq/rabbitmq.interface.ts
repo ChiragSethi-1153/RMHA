@@ -22,3 +22,40 @@ export interface QueueConfig {
   deadLetterExchange?: string;
   messageTtl?: number;
 }
+
+export interface RabbitMQPublishMessage {
+  exchange: string;
+  bindingKey: string;
+  content: string;
+  properties: any;
+}
+
+export interface RabbitMQConsumeMessage {
+  fields: {
+    consumerTag: string;
+    deliveryTag: number;
+    redelivered: boolean;
+    exchange: string;
+    routingKey: string;
+  };
+  properties: {
+    contentType: string;
+    contentEncoding?: string;
+    headers: {
+      content_type: string;
+      type: string;
+    };
+    deliveryMode: number;
+    priority?: number;
+    correlationId?: string;
+    replyTo?: string;
+    expiration?: number;
+    messageId: string;
+    timestamp?: number;
+    type: string;
+    userId?: string;
+    appId: string;
+    clusterId?: string;
+  };
+  content: Buffer;
+}

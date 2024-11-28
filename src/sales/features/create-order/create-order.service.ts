@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { OrderRepository } from 'src/sales/infrastructure/repositories/orders/order.repository';
 import { CreateOrderCommand } from './create-order.dto';
-import { ProductRepository } from 'src/sales/infrastructure/repositories/product/product.entity';
+import { ProductRepository } from 'src/sales/infrastructure/repositories/product/product.repository';
 
 @Injectable()
 export class CreateOrderHandler {
@@ -15,9 +15,15 @@ export class CreateOrderHandler {
   ) {}
 
   async handle(orderData: CreateOrderPayload) {
+
+    const productsWithParsedQuantity = orderData.products.map((product) => ({
+      ...product,
+      quantity: Number(product.quantity),
+    }));
+
     let total = 0;
     await Promise.all(
-      orderData.products.map(async (product) => {
+      productsWithParsedQuantity.map(async (product) => {
         const productData = await this.productRepository.getProduct(
           product.product_id,
         );
@@ -26,7 +32,7 @@ export class CreateOrderHandler {
     );
     await this.repository.storeOrder({
       total_amount: total,
-      products: orderData.products,
+      products: productsWithParsedQuantity,
       customer_id: orderData.customer_id,
       order_id: orderData.order_id,
     });
