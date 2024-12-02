@@ -22,7 +22,7 @@ export class ConsumerService {
     this.config = this.connection.getConnectionConfiguration();
     this.prefetchLimit = this.config.consumeMessageLimit;
     this.signatureTypes = this.messageHandler.getSignatureTypes();
-    this.connection.rabbitMqEvents.on('connected', this.consume.bind(this));
+    // this.connection.rabbitMqEvents.on('connected', this.consume.bind(this));
   }
 
   async startConsuming() {

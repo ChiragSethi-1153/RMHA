@@ -16,6 +16,7 @@ export class OrderRepository extends Repository<OrderBilling> {
   }
 
   async getOrderById(orderId: string, transaction: EntityManager = null) {
+    console.log('orderId: ', orderId);
     if (transaction) {
       return await transaction.findOneBy(OrderBilling, { order_id: orderId });
     }
