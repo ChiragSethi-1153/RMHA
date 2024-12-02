@@ -11,10 +11,10 @@ import {
 
 @Injectable()
 export class RabbitmqConnectionService {
+  public rabbitMqEvents = new EventEmitter();
   private config: ConfigType;
   private channel: amqp.Channel;
   private connection: amqp.Connection;
-  private rabbitMqEvents = new EventEmitter();
   private maxReconnectTries = 3;
   private isMaxReconnectPolicyApplied = false;
   private reconnectTries = 0;

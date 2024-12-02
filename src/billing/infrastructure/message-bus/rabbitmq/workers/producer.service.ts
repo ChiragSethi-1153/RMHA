@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { RabbitmqConnectionService } from '../config/rabbitmq-connection.service';
 import { ConfigType, RabbitMQPublishMessage } from '../rabbitmq.interface';
-import { OutboxMessageRepository } from 'src/sales/infrastructure/repositories/outbox-message/outbox-message.repository';
 import { RabbitmqConfigurerService } from '../config/rabbitmq-configurer.service';
-import { OutboxMessage } from 'src/sales/domain/outbox/outbox-message.entity';
+import { OutboxMessageRepository } from 'src/billing/infrastructure/repositories/outbox-message/outbox-message.repository';
+import { BillingOutboxMessage } from 'src/billing/domain/outbox/outbox-message.entity';
 
 @Injectable()
 export class ProducerService {
@@ -28,7 +28,7 @@ export class ProducerService {
     await this.connection.closeChannel();
   }
 
-  async publisher(outboxMessage: OutboxMessage) {
+  async publisher(outboxMessage: BillingOutboxMessage) {
     try {
       const message = outboxMessage.body;
       const properties = outboxMessage.properties;
@@ -53,7 +53,7 @@ export class ProducerService {
     }
   }
 
-  async publishMessages(messages: OutboxMessage[]) {
+  async publishMessages(messages: BillingOutboxMessage[]) {
     await this.connect();
 
     for (const message of messages) {

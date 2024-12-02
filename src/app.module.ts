@@ -5,12 +5,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { dataSourceOptions } from './common/ormconfig';
 import { SalesModule } from './sales/sales.module';
 import { TypeOrmModule } from './common/type-orm';
+import { BillingModule } from './billing/billing.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule,
-    SalesModule
+    SalesModule,
+    BillingModule
   ],
   controllers: [AppController],
   providers: [AppService],

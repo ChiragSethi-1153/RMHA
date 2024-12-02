@@ -22,6 +22,7 @@ export class ConsumerService {
     this.config = this.connection.getConnectionConfiguration();
     this.prefetchLimit = this.config.consumeMessageLimit;
     this.signatureTypes = this.messageHandler.getSignatureTypes();
+    this.connection.rabbitMqEvents.on('connected', this.consume.bind(this));
   }
 
   async startConsuming() {
@@ -35,6 +36,46 @@ export class ConsumerService {
           new Date(),
           '=================',
         );
+
+        const redeliveryCount =
+          message.properties.headers['redelivery_count'] || 0;
+        const type =
+          message?.properties?.type || message?.properties?.headers?.type;
+
+        console.log(
+          'INFO Received message:',
+          type,
+          '|',
+          'Message redelivery count:',
+          redeliveryCount,
+        );
+
+        if (!message.properties?.messageId) {
+          console.log(
+            'INFO Message ignored: Message does not have a messageId.',
+          );
+          this?.channel.ack(message);
+          return;
+        }
+
+        if (!type || !this.signatureTypes.includes(type)) {
+          console.log(
+            'INFO Message ignored: No available handler found or missing message type property.',
+          );
+          this?.channel.ack(message);
+          return;
+        }
+
+        try {
+          await this.messageHandler.handleMessage(
+            message,
+            this.config.immediateRetriesNumber,
+          );
+        } catch (error) {
+          await this.handleError(message, error, redeliveryCount);
+        } finally {
+          this?.channel.ack(message);
+        }
       },
     );
   }
@@ -47,6 +88,7 @@ export class ConsumerService {
   }
 
   async consumeMessage(limit: number) {
+    this.prefetchLimit = limit || this.prefetchLimit;
     await this.connection.connect();
     await this.rabbitmqConfigurerService.configure();
     await this.consume(limit);

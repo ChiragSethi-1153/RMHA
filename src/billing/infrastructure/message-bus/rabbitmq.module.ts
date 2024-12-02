@@ -16,12 +16,17 @@ import { InboxMessageRepository } from '../repositories/inbox-message/inbox-mess
 import { OrderRepository } from '../repositories/order/order.repository';
 import { BillingAccountRepository } from '../repositories/billing-accounts/billing-accounts.repository';
 import { OrderPlacedProcessor } from '../processors/order-placed/order-placed';
+import { FetchBillingAccountHandler } from 'src/billing/features/fetch-billing-accounts/fetch-billing-accounts.service';
+import { BillingModule } from 'src/billing/billing.module';
+import { SalesModule } from 'src/sales/sales.module';
 
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule,
+    BillingModule,
+    SalesModule
   ],
   providers: [
     DispatchMessages,
@@ -34,12 +39,11 @@ import { OrderPlacedProcessor } from '../processors/order-placed/order-placed';
     OutboxMessageRelay,
     ConsumerService,
     InboxMessageHandler,
+    InboxMessageRepository,
     SignatureTypes,
-    InboxMessageRepository,
     OrderRepository,
+    FetchBillingAccountHandler,
     BillingAccountRepository,
-    OutboxMessageRepository,
-    InboxMessageRepository,
     OrderPlacedProcessor,
   ],
 })
