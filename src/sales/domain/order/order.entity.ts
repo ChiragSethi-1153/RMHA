@@ -1,6 +1,7 @@
 import { Exclude } from 'class-transformer';
 import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm';
 import { OrderStatus } from './enums/status-enum';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 @Entity('sales_order')
 export class Order {

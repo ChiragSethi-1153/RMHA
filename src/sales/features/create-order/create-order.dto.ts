@@ -1,17 +1,30 @@
-import { Optional } from "@nestjs/common";
-import { IsArray, IsUUID } from "class-validator";
+import { Optional } from '@nestjs/common';
+import { Type } from 'class-transformer';
+import { IsArray, IsNotEmpty, IsNumber, IsUUID, ValidateNested } from 'class-validator';
 
-export class CreateOrderCommand {
-    @IsUUID()
-    order_id: string;
-  
-    @IsUUID()
-    customer_id: string;
-  
-    @IsArray()
-    products: {
-      product_id: string;
-      quantity: number;
-    }[];
+export class CreateOrderDto {
+  @IsUUID()
+  @IsNotEmpty()
+  order_id: string;
 
-  }
+  @IsUUID()
+  @IsNotEmpty()
+  customer_id: string;
+
+  @IsArray()
+  @IsNotEmpty()
+  @ValidateNested({ each: true })
+  @Type(() => Products)
+  products: Products[];
+}
+
+export class Products {
+  @IsUUID()
+  @IsNotEmpty()
+  product_id: string;
+
+  @Type(() => Number)
+  @IsNumber()
+  @IsNotEmpty()
+  quantity: number;
+}

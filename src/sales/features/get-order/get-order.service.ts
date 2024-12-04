@@ -12,14 +12,6 @@ export class GetOrdersHandler {
 
     public async handle(order_id: string) {
         const order = await this.repository.getOrderById(order_id);
-        const parsedOrder = {
-            ...order,
-            total_amount: Number(order.total_amount),
-            products: order.products.map((product) => ({
-                ...product,
-                quantity: Number(product.quantity),
-            })),
-        };
-        return parsedOrder
+        return order
     }
 }

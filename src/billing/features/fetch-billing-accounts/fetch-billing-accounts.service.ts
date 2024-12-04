@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { BillingAccount } from 'src/billing/domain/billing-account/billing-account.entity';
 import { BillingAccountRepository } from 'src/billing/infrastructure/repositories/billing-accounts/billing-accounts.repository';
 import { EntityManager } from 'typeorm';
 
@@ -10,7 +11,7 @@ export class FetchBillingAccountHandler {
     private readonly repository: BillingAccountRepository,
   ) {}
 
-  public async getBillingAccounts() {
+  public async getBillingAccounts() : Promise<BillingAccount[]> {
     return await this.repository.getBillingAccounts();
   }
   public async getBillingAccountsById(id: string, transaction: EntityManager = null) {

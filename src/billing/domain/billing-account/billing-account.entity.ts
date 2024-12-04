@@ -1,3 +1,4 @@
+import { IsNumber } from 'class-validator';
 import {
     Entity,
     PrimaryColumn,
@@ -10,6 +11,7 @@ import {
     billing_account_id: string;
   
     @Column({ type: 'decimal', nullable: false })
+    @IsNumber()
     balance: number;
   
     @Column({ type: 'varchar', length: 16, nullable: false })
